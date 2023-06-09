@@ -54,10 +54,4 @@ public class UIPermissions : MonoBehaviour
     {
         IOSPermissionSettings.OpenSettings();
     }
-    
-    public void CheckCameraPermissionUsingPlugin()
-    {
-        Debug.Log($"camera permission by plugin: {IOSPermissionSettings.CheckCameraPermission()}");
-        //m_TextLog.text += $"\n camera permission by plugin: {IOSPermissionSettings.CheckCameraPermission()} ";
-    }
 }
