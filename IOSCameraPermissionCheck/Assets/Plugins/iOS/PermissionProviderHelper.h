@@ -5,6 +5,7 @@
 @interface PermissionProviderHelper : NSObject {}
 
 - (void) verifyPermission:(NSString *)gameObject withCallback:(NSString *)callback;
+- (void) checkPermission:(NSString *)gameObject withCallback:(NSString *)callback;
 
 @end
 

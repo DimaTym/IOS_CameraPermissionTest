@@ -48,6 +48,16 @@ public class UIPermissions : MonoBehaviour
         Debug.Log($"check result is: {IOSCameraPermissionController.HasUserCameraAuthorization}");
         //m_TextLog.text += $"\n check result is: {IOSCameraPermissionController.HasUserCameraAuthorization}";
     }
+    
+    public void CheckPermissionByPlugin()
+    {
+        iOSCameraPermission.VerifyPermission(gameObject.name, "CheckPermissionCallback");
+    }
+    
+    private void CheckPermissionCallback(string permissionWasGranted)
+    {
+        Debug.Log("Callback.permissionWasGranted = " + permissionWasGranted);
+    }
 
 
     public void OpenSettings()

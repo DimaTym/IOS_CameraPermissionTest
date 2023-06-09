@@ -4,20 +4,59 @@
 - (void) verifyPermission:(NSString *)NSGameObject withCallback:(NSString *)NSCallback
 {
 	// if (iOS >= 7) ask for camera access;
-    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)]) {
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-        
-        if (granted == YES) { UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]),
-                                               ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "true"); }
-        
-        else { UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]),
-                                ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "false"); }
-    }];
+    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)]) 
+    {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) 
+        {
+            if (granted == YES) 
+            { 
+                UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "true"); 
+            }
+            else 
+            { 
+                UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "false"); 
+            }
+        }];
     }
 	// if (iOS < 7) camera access is always permitted.
-    else {
-        UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]),
-                         ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "true");
+    else 
+    {
+        UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "true");
+    }
+}
+
+- (void) checkPermission:(NSString *)NSGameObject withCallback:(NSString *)NSCallback
+{
+	// if (iOS >= 7) ask for camera access;
+    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)]) 
+    {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+
+        if(authStatus == AVAuthorizationStatusAuthorized) 
+        {
+            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Authorized"); 
+        } 
+        else if(authStatus == AVAuthorizationStatusDenied) // denied
+        { 
+            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Denied");
+        } 
+        else if(authStatus == AVAuthorizationStatusRestricted) // restricted, normally won't happen
+        {
+            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Restricted");
+        } 
+        else if(authStatus == AVAuthorizationStatusNotDetermined) // not determined?!
+        {
+            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "not determined");
+        } 
+        else 
+        {
+            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "impossible, unknown authorization status");
+        }
+    }
+	// if (iOS < 7) camera access is always permitted.
+    else 
+    {
+        UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Authorized iOS < 7");
     }
 }
 

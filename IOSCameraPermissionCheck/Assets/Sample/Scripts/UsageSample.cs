@@ -18,9 +18,9 @@ public class UsageSample : MonoBehaviour
         if (_text != null) _text.text = "Verifying camera permission...";
         else Debug.Log("Link UI Text in the Inspector.");
 
-        // Disable the button while verifying permission.
-        if (_button != null) _button.interactable = false;
-        else Debug.Log("Link UI Button in the Inspector.");
+      //  // Disable the button while verifying permission.
+      //  if (_button != null) _button.interactable = false;
+      //  else Debug.Log("Link UI Button in the Inspector.");
 
         // Use native UI to request camera permission.
         iOSCameraPermission.VerifyPermission(gameObject.name, "SampleCallback");
@@ -42,7 +42,7 @@ public class UsageSample : MonoBehaviour
             if (_text != null) _text.text = "Please active camera access in Settings.";
 
             // You may want to re-enable the button to display the Settings message again.
-            if (_button != null) _button.interactable = true;
+         //   if (_button != null) _button.interactable = true;
         }
     }
 }

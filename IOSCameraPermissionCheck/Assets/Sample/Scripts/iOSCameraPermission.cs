@@ -9,11 +9,23 @@ public static class iOSCameraPermission
     [DllImport("__Internal")]
     extern static private void _verifyPermission(string gameObject, string callback);
 #endif
+    
+#if UNITY_IOS && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    extern static private void _checkPermission(string gameObject, string callback);
+#endif
 
     public static void VerifyPermission(string gameObjectName, string callbackName)
     {
 #if UNITY_IOS && !UNITY_EDITOR
         _verifyPermission(gameObjectName, callbackName);
+#endif
+    }
+    
+    public static void CheckPermission(string gameObjectName, string callbackName)
+    {
+#if UNITY_IOS && !UNITY_EDITOR
+        _checkPermission(gameObjectName, callbackName);
 #endif
     }
 }
