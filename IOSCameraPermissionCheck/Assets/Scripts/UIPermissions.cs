@@ -5,6 +5,7 @@
 // IDea for check plugin - https://www.appsloveworld.com/coding/ios/2/detect-permission-of-camera-in-ios
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,23 @@ public class UIPermissions : MonoBehaviour
 {
     public Text m_TextLog;
 
+
+    private void OnEnable()
+    {
+        Application.logMessageReceived += LogCallback;
+    }
+    
+    //Called when there is an exception
+    void LogCallback(string condition, string stackTrace, LogType type)
+    {
+        m_TextLog.text += $"\n {type}: {condition}";
+    }
+
+    void OnDisable()
+    {
+        Application.logMessageReceived -= LogCallback;
+    }
+
     public void RequestPermission()
     {
         IOSCameraPermissionController.CreateOrGetInstance().RequestPermissionForCamera(RequestPermissionResult);
@@ -21,12 +39,14 @@ public class UIPermissions : MonoBehaviour
     
     void RequestPermissionResult(bool result)
     {
-        m_TextLog.text += $"\n request result is: {result}";
+        Debug.Log($"request result is: {result}");
+        //m_TextLog.text += $"\n request result is: {result}";
     }
     
     public void CheckPermission()
     {
-        m_TextLog.text += $"\n check result is: {IOSCameraPermissionController.HasUserCameraAuthorization}";
+        Debug.Log($"check result is: {IOSCameraPermissionController.HasUserCameraAuthorization}");
+        //m_TextLog.text += $"\n check result is: {IOSCameraPermissionController.HasUserCameraAuthorization}";
     }
 
 
@@ -37,6 +57,7 @@ public class UIPermissions : MonoBehaviour
     
     public void CheckCameraPermissionUsingPlugin()
     {
-        m_TextLog.text += $"\n camera permission by plugin: {IOSPermissionSettings.CheckCameraPermission()} ";
+        Debug.Log($"camera permission by plugin: {IOSPermissionSettings.CheckCameraPermission()}");
+        //m_TextLog.text += $"\n camera permission by plugin: {IOSPermissionSettings.CheckCameraPermission()} ";
     }
 }
