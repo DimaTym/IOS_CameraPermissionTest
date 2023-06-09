@@ -56,7 +56,7 @@ public class UIPermissions : MonoBehaviour
     
     private void CheckPermissionCallback(string permissionWasGranted)
     {
-        Debug.Log("Callback.permissionWasGranted = " + permissionWasGranted);
+        Debug.Log("CheckPermission = " + permissionWasGranted);
     }
 
 
