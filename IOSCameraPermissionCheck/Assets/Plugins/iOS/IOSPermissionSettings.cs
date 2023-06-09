@@ -11,5 +11,8 @@ public class IOSPermissionSettings
 
         [DllImport ("__Internal")]
         public static extern void OpenSettings();
+        
+        [DllImport ("__Internal")]
+        public static extern string CheckCameraPermission();
 #endif
 }
