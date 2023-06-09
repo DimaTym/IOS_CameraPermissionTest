@@ -51,7 +51,7 @@ public class UIPermissions : MonoBehaviour
     
     public void CheckPermissionByPlugin()
     {
-        iOSCameraPermission.VerifyPermission(gameObject.name, "CheckPermissionCallback");
+        iOSCameraPermission.CheckPermission(gameObject.name, "CheckPermissionCallback");
     }
     
     private void CheckPermissionCallback(string permissionWasGranted)
