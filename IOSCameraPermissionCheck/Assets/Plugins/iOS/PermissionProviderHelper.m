@@ -25,62 +25,29 @@
     }
 }
 
-- (void) checkPermission:(NSString *)NSGameObject withCallback:(NSString *)NSCallback
+- (BOOL) checkPermission 
 {
-	// if (iOS >= 7) ask for camera access;
+    // Check if the device supports the requestAccessForMediaType:completionHandler: method
     if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)]) 
     {
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
 
-        if(authStatus == AVAuthorizationStatusAuthorized) 
-        {
-            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Authorized"); 
-        } 
-        else if(authStatus == AVAuthorizationStatusDenied) // denied
-        { 
-            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Denied");
-        } 
-        else if(authStatus == AVAuthorizationStatusRestricted) // restricted, normally won't happen
-        {
-            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Restricted");
-        } 
-        else if(authStatus == AVAuthorizationStatusNotDetermined) // not determined?!
-        {
-            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "not determined");
-        } 
-        else 
-        {
-            UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "impossible, unknown authorization status");
+        if (authStatus == AVAuthorizationStatusAuthorized) {
+            return YES;
+        } else if (authStatus == AVAuthorizationStatusDenied) {
+            return NO;
+        } else if (authStatus == AVAuthorizationStatusRestricted) {
+            return NO;
+        } else if (authStatus == AVAuthorizationStatusNotDetermined) {
+            return NO;
+        } else {
+            return NO;
         }
     }
-	// if (iOS < 7) camera access is always permitted.
-    else 
-    {
-        UnitySendMessage(([NSGameObject cStringUsingEncoding:NSUTF8StringEncoding]), ([NSCallback cStringUsingEncoding:NSUTF8StringEncoding]), "Authorized iOS < 7");
+    // If the device is running on iOS < 7, assume camera access is always permitted.
+    else {
+        return YES;
     }
 }
 
 @end
-
-// MIT License
-// 
-// Copyright (c) 2018 Cory Butler
-// www.CoryButler.com
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.

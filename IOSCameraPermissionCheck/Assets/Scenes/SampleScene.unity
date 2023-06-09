@@ -921,7 +921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap here to request camera permission.
+  m_Text: Request permission by plugin
 --- !u!222 &1023768052
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1028,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1300008089
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1045,10 +1045,10 @@ RectTransform:
   m_Father: {fileID: 670003328}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -708.52, y: 350}
-  m_SizeDelta: {x: 238.96, y: 135.1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 119.47998, y: -546}
+  m_SizeDelta: {x: 238.96002, y: 135.09998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300008090
 MonoBehaviour:
@@ -1162,7 +1162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1531516998
 RectTransform:
   m_ObjectHideFlags: 0

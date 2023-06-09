@@ -15,8 +15,8 @@ public class UsageSample : MonoBehaviour
         Debug.Log("VerifyPermission()");
 
         // Display some sort of thinking message to the user.
-        if (_text != null) _text.text = "Verifying camera permission...";
-        else Debug.Log("Link UI Text in the Inspector.");
+       // if (_text != null) _text.text = "Verifying camera permission...";
+       // else Debug.Log("Link UI Text in the Inspector.");
 
       //  // Disable the button while verifying permission.
       //  if (_button != null) _button.interactable = false;
@@ -33,13 +33,13 @@ public class UsageSample : MonoBehaviour
         if (permissionWasGranted == "true")
         {
             // You can now use the device camera.
-            if (_text != null) _text.text = "You can now use the camera";
+           // if (_text != null) _text.text = "You can now use the camera";
         }
         else
         {
             // You cannot use the device camera.  You may want to display a message to the user
             // about changing the camera permission in the Settings app.
-            if (_text != null) _text.text = "Please active camera access in Settings.";
+           // if (_text != null) _text.text = "Please active camera access in Settings.";
 
             // You may want to re-enable the button to display the Settings message again.
          //   if (_button != null) _button.interactable = true;
